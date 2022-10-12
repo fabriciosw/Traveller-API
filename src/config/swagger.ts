@@ -9,12 +9,19 @@ const options: swaggerJsdoc.Options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Blob blog API Docs',
+      title: 'Traveller API Docs',
       version,
     },
     consumes: ['application/json'],
     produces: ['application/json'],
-    servers: [{ url: `http://localhost:${config.port}` }],
+    servers: [
+      {
+        url:
+          config.env === 'production'
+            ? `https://${config.publicUrl}`
+            : `http://localhost:${config.port}`,
+      },
+    ],
     components: {
       securitySchemas: {
         bearerAuth: {

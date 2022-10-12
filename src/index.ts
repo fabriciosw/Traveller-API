@@ -4,7 +4,7 @@ import swaggerDocs from './config/swagger';
 import config, { environments } from './config/config';
 import app from './app';
 
-app.listen(process.env.PORT || config.port, async () => {
+app.listen(config.port, async () => {
   await database();
 
   swaggerDocs(app, config.publicUrl, config.port);
