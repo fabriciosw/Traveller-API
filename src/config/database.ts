@@ -5,7 +5,7 @@ import logger from './logger';
 
 async function database() {
   try {
-    if (config.postgresDb.host) {
+    if (config.postgresDb.dbProdUrl || config.postgresDb.host) {
       await createConnection(ormConfig);
       logger.info('Postgres connected');
     }
