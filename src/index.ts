@@ -13,7 +13,7 @@ if (config.env !== environments.PRODUCTION) {
     swaggerDocs(app, config.publicUrl, config.port);
   });
 } else {
-  app.listen(config.port, async () => {
+  app.listen(process.env.PORT, async () => {
     logger.info(`API rodando em http://${config.publicUrl}`);
 
     await database();

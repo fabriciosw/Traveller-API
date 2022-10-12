@@ -1,4 +1,4 @@
-# :rocket: Quickstart NodeJS + Typescript
+# :rocket: Projeto Traveller
 
 Esse projeto foi criado utilizando o framework [express]('https://expressjs.com/pt-br/').
 
