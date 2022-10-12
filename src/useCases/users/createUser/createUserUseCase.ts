@@ -2,7 +2,6 @@ import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcrypt';
 import { CreateUserInput } from '../../../schemas/user.schema';
 import ApiError from '../../../utils/apiError.utils';
-import UserPermission from '../../../database/entities/enums/UserPermission';
 import config from '../../../config/config';
 import { IUserRepository } from '../../../database/repositories/interfaces/UserRepository/IUserRepository';
 import IUseCase from '../../IUseCase';
@@ -29,7 +28,6 @@ export default class CreateUserUseCase implements IUseCase {
       name: body.name,
       email: body.email,
       password: hashedPassword,
-      permission: UserPermission.NONE,
     });
 
     await this.userRepository.save(user);

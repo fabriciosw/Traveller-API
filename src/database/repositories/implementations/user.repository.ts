@@ -4,17 +4,11 @@ import { ICreateUser, IUserRepository } from '../interfaces/UserRepository';
 
 @EntityRepository(User)
 export default class UserRepository implements IUserRepository {
-  async create({
-    name,
-    email,
-    password,
-    permission,
-  }: ICreateUser): Promise<User> {
+  async create({ name, email, password }: ICreateUser): Promise<User> {
     const user = getRepository(User).create({
       name,
       email,
       password,
-      permission,
     });
 
     return user;

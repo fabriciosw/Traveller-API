@@ -1,10 +1,15 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export class User1664388733460 implements MigrationInterface {
+export class Rating1664391918210 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'ratings',
         columns: [
           {
             name: 'id',
@@ -14,18 +19,23 @@ export class User1664388733460 implements MigrationInterface {
             default: `uuid_generate_v4()`,
           },
           {
-            name: 'name',
-            type: 'varchar(120)',
-            isNullable: false,
-          },
-          {
-            name: 'email',
+            name: 'userId',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'password',
+            name: 'placeId',
             type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'comment',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'grade',
+            type: 'integer',
             isNullable: false,
           },
           {
@@ -44,9 +54,17 @@ export class User1664388733460 implements MigrationInterface {
       }),
       true
     );
+
+    const authorIdForeignKey = new TableForeignKey({
+      columnNames: ['userId'],
+      referencedColumnNames: ['id'],
+      referencedTableName: 'users',
+      onDelete: 'CASCADE',
+    });
+    await queryRunner.createForeignKey('ratings', authorIdForeignKey);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('ratings');
   }
 }

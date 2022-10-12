@@ -25,13 +25,10 @@ export default class CreateSessionUseCase implements IUseCase {
       throw new ApiError(StatusCodes.UNAUTHORIZED, 'INVALID_CREDENTIALS');
     }
 
-    const token = signJwt(
-      { auth: `${user.permission}` },
-      {
-        subject: `${user.id}`,
-        expiresIn: config.accessTokenTtl,
-      }
-    );
+    const token = signJwt({
+      subject: `${user.id}`,
+      expiresIn: config.accessTokenTtl,
+    });
 
     return token;
   }
