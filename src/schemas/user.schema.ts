@@ -43,6 +43,7 @@ import { object, string, InferType } from 'yup';
  *        - name
  *        - email
  *        - password
+ *        - photoUrl
  *       properties:
  *         name:
  *           type: string
@@ -53,6 +54,9 @@ import { object, string, InferType } from 'yup';
  *         password:
  *           type: string
  *           example: "12345"
+ *         photoUrl:
+ *           type: string
+ *           example: "photo.com"
  */
 
 const create = {

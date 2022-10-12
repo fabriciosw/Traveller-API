@@ -3,37 +3,19 @@ import { object, string, InferType, number } from 'yup';
 /**
  * @openapi
  * components:
- *   error:
- *     NonexistentCategoryId:
- *        properties:
- *            status:
- *              type: number
- *              example: 404
- *            message:
- *              type: string
- *              example: CATEGORY_ID_DOES_NOT_EXIST
- *     NonexistentPostId:
- *        properties:
- *            status:
- *              type: number
- *              example: 404
- *            message:
- *              type: string
- *              example: POST_ID_DOES_NOT_EXIST
  *   schemas:
- *     createPost:
+ *     createRating:
  *          type: object
  *          properties:
- *            title:
+ *            comment:
  *              type: string
- *              example: Saiba mais sobre o clean code
- *            categoryId:
+ *            grade:
+ *              type: number
+ *              description: number from 1 to 5
+ *              example: 4
+ *            placeId:
  *              type: string
- *              example: 169d28a2-5e3d-407e-ac39-7541812c9f88
- *            content:
- *              type: string
- *              example: string
- *     getAllPosts:
+ *     getAllRatings:
  *      type: array
  *      items:
  *        type: object
@@ -41,25 +23,23 @@ import { object, string, InferType, number } from 'yup';
  *          id:
  *            type: string
  *            example: bbe6fa3f-b11b-4b89-87e6-bb54511b8890
- *          title:
+ *          comment:
  *            type: string
- *            example: Saiba mais sobre o clean code
- *          author:
+ *          placeId:
+ *            type: string
+ *          grade:
+ *            type: number
+ *            example: 4
+ *          user:
  *            type: object
  *            properties:
  *              name:
  *                type: string
  *                example: Fabricio
- *          category:
- *            type: object
- *            properties:
- *              name:
- *                type: string
- *                example: Entretenimento
  *          createdAt:
  *            type: string
  *            example: 2022-09-30T16:07:11.218Z
- *     getUserPosts:
+ *     getRatingsByPlaceId:
  *      type: array
  *      items:
  *        type: object
@@ -67,45 +47,22 @@ import { object, string, InferType, number } from 'yup';
  *          id:
  *            type: string
  *            example: bbe6fa3f-b11b-4b89-87e6-bb54511b8890
- *          title:
+ *          comment:
  *            type: string
- *            example: Saiba mais sobre o clean code
- *          content:
+ *          placeId:
  *            type: string
- *            example: string
- *          category:
- *            type: object
- *            properties:
- *              name:
- *                type: string
- *                example: Entretenimento
- *          createdAt:
- *            type: string
- *            example: 2022-09-30T16:07:11.218Z
- *     getPostById:
- *        type: object
- *        properties:
- *          id:
- *            type: string
- *            example: bbe6fa3f-b11b-4b89-87e6-bb54511b8890
- *          title:
- *            type: string
- *            example: Saiba mais sobre o clean code
- *          content:
- *            type: string
- *            example: string
- *          category:
- *            type: object
- *            properties:
- *              name:
- *                type: string
- *                example: Entretenimento
- *          author:
+ *          grade:
+ *            type: number
+ *            example: 4
+ *          user:
  *            type: object
  *            properties:
  *              name:
  *                type: string
  *                example: Fabricio
+ *              photoUrl:
+ *                type: string
+ *                example: foto.com
  *          createdAt:
  *            type: string
  *            example: 2022-09-30T16:07:11.218Z

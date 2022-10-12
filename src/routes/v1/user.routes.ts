@@ -41,6 +41,7 @@ const routes = Router();
  *                "password is required",
  *                'name must have maximum 120 characters',
  *                'email format is invalid',
+ *                'photoUrl is required'
  *               ]
  *       409:
  *         description: There's already an user with that Email

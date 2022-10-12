@@ -55,6 +55,7 @@ export default class PostRepository implements IRatingRepository {
         'ratings.grade',
         'ratings.createdAt',
         'user.name',
+        'user.photoUrl',
       ])
       .getMany();
 
