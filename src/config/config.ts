@@ -48,7 +48,7 @@ const config = {
   publicUrl: envVars.PUBLIC_URL,
   postgresDb: {
     host: envVars.POSTGRES_HOST,
-    port: Number(process.env.PORT) || envVars.POSTGRES_PORT,
+    port: envVars.POSTGRES_PORT,
     username: envVars.POSTGRES_USER,
     password: envVars.POSTGRES_PASSWORD,
     database: envVars.POSTGRES_DB,
