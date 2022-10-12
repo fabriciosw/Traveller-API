@@ -33,6 +33,7 @@ app.use(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ) => {
+    console.log(error);
     if (error instanceof ApiError) {
       return response.status(error.statusCode).json({
         message: error.message,
