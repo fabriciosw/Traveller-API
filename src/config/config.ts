@@ -41,7 +41,7 @@ try {
 } catch ({ errors }) {
   throw new Error(`Config validation error: ${errors}`);
 }
-
+console.log('AQUI: ' + envVars.DATABASE_URL);
 const config = {
   env: envVars.NODE_ENV,
   port: envVars.API_PORT,

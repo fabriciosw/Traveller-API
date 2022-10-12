@@ -5,11 +5,6 @@ type Options = ConnectionOptions;
 
 const options: Options = {
   type: 'postgres',
-  host: config.postgresDb.host,
-  port: config.postgresDb.port,
-  username: config.postgresDb.username,
-  password: config.postgresDb.password,
-  database: config.postgresDb.database,
   url: config.postgresDb.dbProdUrl,
   logger: 'advanced-console',
   cli: {
