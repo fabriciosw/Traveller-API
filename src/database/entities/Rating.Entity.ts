@@ -4,7 +4,7 @@ import User from './User.Entity';
 import Base from './Base.Entity';
 
 @Entity('ratings')
-export default class Post extends Base {
+export default class Rating extends Base {
   @ManyToOne(() => User, (user) => user.ratings)
   @JoinColumn({ name: 'userId' })
   user: User;

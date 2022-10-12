@@ -13,6 +13,9 @@ export default class User extends Base {
   @Column({ nullable: false })
   public password: string;
 
+  @Column({ nullable: false })
+  public photoUrl: string;
+
   @OneToMany(() => Rating, (rating: Rating) => rating.user)
   ratings: Rating[];
 }

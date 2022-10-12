@@ -64,34 +64,12 @@ const create = {
       .defined('email is required')
       .matches(/\S+@\S+\.\S+/, 'email format is invalid'),
     password: string().defined('password is required'),
+    photoUrl: string().defined('photoUrl is required'),
   }).defined(),
-};
-
-const update = {
-  body: object({
-    name: string()
-      .defined('name is required')
-      .max(120, 'name must have maximum 120 characters'),
-  }).defined(),
-};
-
-const params = {
-  params: object({ userId: string().defined('userId is required') }),
 };
 
 export const createUserSchema = object({
   ...create,
 });
 
-export const updateUserSchema = object({
-  ...update,
-  ...params,
-});
-
-// export const deleteUserSchema = object({
-//   ...params,
-// });
-
 export type CreateUserInput = InferType<typeof createUserSchema>;
-export type UpdateUserInput = InferType<typeof updateUserSchema>;
-// export type DeleteUserInput = InferType<typeof deleteUserSchema>;

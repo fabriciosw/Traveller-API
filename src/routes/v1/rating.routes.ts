@@ -3,12 +3,11 @@ import requireUser from '../../middlewares/requireUser';
 import validateResource from '../../middlewares/validateResource';
 import {
   createRatingSchema,
-  onlyParamsPostSchema,
+  placeIdParamRatingSchema,
 } from '../../schemas/rating.schema';
 import createRatingHandler from '../../useCases/ratings/createRating';
-import readAllPostsHandler from '../../useCases/ratings/readAllPosts';
-import readUserPostsHandler from '../../useCases/ratings/readUserPosts';
-import readPostByIdHandler from '../../useCases/ratings/readPostById';
+import readAllRatingsHandler from '../../useCases/ratings/readAllRatings';
+import readRatingByPlaceIdHandler from '../../useCases/ratings/readRatingByPlaceId';
 
 const routes = Router();
 
@@ -29,7 +28,7 @@ const routes = Router();
 //  *  post:
 //  *     tags:
 //  *     - Posts
-//  *     summary: Create a new post
+//  *     summary: Create a new rating
 //  *     security:
 //  *      - bearerAuth: []
 //  *     requestBody:
@@ -44,7 +43,7 @@ const routes = Router();
 //  *          application/json:
 //  *           example:
 //  *             message: Post created
-//  *             post:
+//  *             rating:
 //  *              id: 7e63add2-5f09-4efc-b28d-74fb07f3e14e
 //  *              createdAt: 2022-09-28T21:17:49.205Z
 //  *       401:
@@ -106,11 +105,11 @@ const routes = Router();
 //  *  get:
 //  *     tags:
 //  *     - Posts
-//  *     summary: Get post by id
+//  *     summary: Get rating by id
 //  *     parameters:
 //  *      - name: postId
 //  *        in: path
-//  *        description: The post id
+//  *        description: The rating id
 //  *        required: true
 //  *     responses:
 //  *       200:
@@ -142,18 +141,12 @@ routes
     (req: Request, res: Response, next: NextFunction) =>
       createRatingHandler.handle(req, res, next)
   )
-  .get((req, res, next) => readAllPostsHandler.handle(req, res, next));
+  .get((req, res, next) => readAllRatingsHandler.handle(req, res, next));
 
 routes
-  .route('/me')
-  .get(requireUser, (req, res, next) =>
-    readUserPostsHandler.handle(req, res, next)
-  );
-
-routes
-  .route('/:postId')
-  .get(validateResource(onlyParamsPostSchema), (req, res, next) =>
-    readPostByIdHandler.handle(req, res, next)
+  .route('/:placeId')
+  .get(validateResource(placeIdParamRatingSchema), (req, res, next) =>
+    readRatingByPlaceIdHandler.handle(req, res, next)
   );
 
 export default routes;

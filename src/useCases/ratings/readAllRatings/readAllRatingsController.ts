@@ -2,10 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import ApiError from '../../../utils/apiError.utils';
 import IController from '../../IController';
-import ReadAllPostsUseCase from './readAllPostsUseCase';
+import ReadAllRatingsUseCase from './readAllRatingsUseCase';
 
-export default class ReadAllPostsController implements IController {
-  constructor(private useCase: ReadAllPostsUseCase) {}
+export default class ReadAllRatingsController implements IController {
+  constructor(private useCase: ReadAllRatingsUseCase) {}
 
   public async handle(
     request: Request,
@@ -13,15 +13,15 @@ export default class ReadAllPostsController implements IController {
     next: NextFunction
   ) {
     try {
-      const posts = await this.useCase.execute();
+      const ratings = await this.useCase.execute();
 
-      return response.status(StatusCodes.OK).json(posts);
+      return response.status(StatusCodes.OK).json(ratings);
     } catch (error: any) {
       if (error instanceof ApiError) return next(error);
 
       throw new ApiError(
         StatusCodes.INTERNAL_SERVER_ERROR,
-        `ReadAllPostsController: ${error.message}`
+        `ReadAllRatingsController: ${error.message}`
       );
     }
   }

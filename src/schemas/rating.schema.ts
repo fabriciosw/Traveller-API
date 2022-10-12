@@ -119,34 +119,19 @@ const create = {
   }).defined(),
 };
 
-const update = {
-  body: object({
-    categoryId: string()
-      .defined('categoryId is required')
-      .length(36, 'A valid categoryId has a string length of 36 characters'),
-    title: string().defined('title is required'),
-    content: string().defined('content is required'),
-  }).defined(),
-};
-
-const params = {
-  params: object({ postId: string().defined('postId is required') }),
+const placeIdParams = {
+  params: object({ placeId: string().defined('placeId is required') }),
 };
 
 export const createRatingSchema = object({
   ...create,
 });
 
-export const updatePostSchema = object({
-  ...update,
-  ...params,
-});
-
-export const onlyParamsPostSchema = object({
-  ...params,
+export const placeIdParamRatingSchema = object({
+  ...placeIdParams,
 });
 
 export type CreateRatingInput = InferType<typeof createRatingSchema>;
-export type ReadPostInput = InferType<typeof onlyParamsPostSchema>;
-export type UpdatePostInput = InferType<typeof updatePostSchema>;
-export type DeletePostInput = InferType<typeof onlyParamsPostSchema>;
+export type ReadRatingByPlaceIdInput = InferType<
+  typeof placeIdParamRatingSchema
+>;

@@ -1,6 +1,6 @@
-import IPost from '../../../../models/rating.model';
+import IRating from '../../../../models/rating.model';
 
-interface IReadAllObj extends Pick<IPost, 'id' | 'createdAt'> {
+interface IReadAllObj extends Pick<IRating, 'id' | 'createdAt'> {
   category: {
     name: string;
   };

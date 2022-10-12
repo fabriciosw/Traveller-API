@@ -2,8 +2,7 @@ import { EntityRepository, getRepository } from 'typeorm';
 import Rating from '../../entities/Rating.Entity';
 import {
   ICreate,
-  IFindByAuthorId,
-  IFindById,
+  IFindByPlaceId,
   IRatingRepository,
   IReadAll,
 } from '../interfaces/RatingRepository';
@@ -29,54 +28,36 @@ export default class PostRepository implements IRatingRepository {
 
   async readAll(): Promise<IReadAll> {
     const posts = await getRepository(Rating)
-      .createQueryBuilder('posts')
-      .innerJoinAndSelect('posts.author', 'author')
-      .innerJoinAndSelect('posts.category', 'category')
+      .createQueryBuilder('ratings')
+      .innerJoinAndSelect('ratings.user', 'user')
       .select([
-        'posts.id',
-        'posts.title',
-        'posts.createdAt',
-        'author.name',
-        'category.name',
+        'ratings.id',
+        'ratings.placeId',
+        'ratings.comment',
+        'ratings.grade',
+        'ratings.createdAt',
+        'user.name',
       ])
       .getMany();
 
     return posts as unknown as IReadAll;
   }
 
-  async findByAuthorId(author: string): Promise<IFindByAuthorId> {
-    const posts = await getRepository(Rating)
-      .createQueryBuilder('posts')
-      .where({ author })
-      .innerJoinAndSelect('posts.category', 'category')
+  async findByPlaceId(placeId: string): Promise<IFindByPlaceId> {
+    const post = await getRepository(Rating)
+      .createQueryBuilder('ratings')
+      .where({ placeId })
+      .innerJoinAndSelect('ratings.user', 'user')
       .select([
-        'posts.id',
-        'posts.title',
-        'posts.createdAt',
-        'posts.content',
-        'category.name',
+        'ratings.id',
+        'ratings.placeId',
+        'ratings.comment',
+        'ratings.grade',
+        'ratings.createdAt',
+        'user.name',
       ])
       .getMany();
 
-    return posts as unknown as IFindByAuthorId;
-  }
-
-  async findById(id: string): Promise<IFindById | undefined> {
-    const post = await getRepository(Rating)
-      .createQueryBuilder('posts')
-      .where({ id })
-      .innerJoinAndSelect('posts.author', 'author')
-      .innerJoinAndSelect('posts.category', 'category')
-      .select([
-        'posts.id',
-        'posts.title',
-        'posts.content',
-        'posts.createdAt',
-        'author.name',
-        'category.name',
-      ])
-      .getOne();
-
-    return post as unknown as IFindById;
+    return post as unknown as IFindByPlaceId;
   }
 }

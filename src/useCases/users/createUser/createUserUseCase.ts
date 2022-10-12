@@ -27,6 +27,7 @@ export default class CreateUserUseCase implements IUseCase {
     const user = await this.userRepository.create({
       name: body.name,
       email: body.email,
+      photoUrl: body.photoUrl,
       password: hashedPassword,
     });
 
