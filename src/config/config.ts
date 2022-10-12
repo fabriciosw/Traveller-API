@@ -29,7 +29,6 @@ const envVarsSchema = yup
     POSTGRES_USER: yup.string(),
     POSTGRES_PASSWORD: yup.string(),
     POSTGRES_DB: yup.string(),
-    DATABASE_URL: yup.string(),
   })
   .noUnknown();
 
@@ -52,7 +51,7 @@ const config = {
     username: envVars.POSTGRES_USER,
     password: envVars.POSTGRES_PASSWORD,
     database: envVars.POSTGRES_DB,
-    dbProdUrl: envVars.DATABASE_URL,
+    dbProdUrl: process.env.DATABASE_URL,
   },
   saltWorkFactor: envVars.SALT_WORK_FACTOR,
   accessTokenTtl: envVars.ACCESS_TOKEN_TTL,
